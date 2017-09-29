@@ -11,6 +11,7 @@ LABEL dockerfile_location=https://github.com/jknsware/modern-jenkins/tree/master
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_ROOT /usr/share/jenkins
 ENV JENKINS_WAR /usr/share/jenkins/ref/warfile/jenkins.war
+ENV JENKINS_GITCRYPT /usr/share/jenkins/ref/gitcrypt/bin
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 ENV user=jenkins
 ENV group=jenkins
