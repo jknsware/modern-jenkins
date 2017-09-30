@@ -9,18 +9,21 @@ LABEL dockerfile_location=https://github.com/jknsware/modern-jenkins/tree/master
 # Tools Version Info
 ENV TERRAFORM_VERSION   = '0.10.4'
 ENV TERRAGRUNT_VERSION  = 'v0.13.0'
+ENV ANSIBLE_VERSION
 
 # Install Terraform
-RUN curl -L https://releases.hashicorp.com/terraform/${_TERRAFORM_VERSION}/terraform_${_TERRAFORM_VERSION}_linux_amd64.zip | tar zxv -C /usr/share/terraform \
-    && sudo chmod +x /usr/share/terraform/terraform
-
-
+RUN curl -L https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip | tar zxv -C /usr/share/tools \
+    && sudo chmod +x /usr/share/tools/terraform
 
 # Install Terragrunt
-[ -f /var/tmp/terragrunt-${_TERRAGRUNT_VERSION} ] || curl -Lo /var/tmp/terragrunt-${_TERRAGRUNT_VERSION} "https://github.com/gruntwork-io/terragrunt/releases/download/${_TERRAGRUNT_VERSION}/terragrunt_linux_amd64"
-[ -f /var/tmp/terragrunt-${_TERRAGRUNT_VERSION} ] && sudo cp -f /var/tmp/terragrunt-${_TERRAGRUNT_VERSION} /usr/local/bin/terragrunt && sudo chmod +x /usr/local/bin/terragrunt
-sudo ln -sf /usr/local/bin/terragrunt /usr/bin/terragrunt
+RUN curl -Lo https://github.com/gruntwork-io/terragrunt/releases/download/${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 | tar zxv -C /urs/share/tools \
+    && sudo chmod +x /usr/share/tools/terragrunt
 
+# Install Ansible
+RUN RUN yum install -y \
+    epel-release \
+    ansible \
+    && yum clean all
 
 
 # It's easy to get confused when just a volume is being used, so let's just keep
