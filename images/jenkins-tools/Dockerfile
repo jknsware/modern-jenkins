@@ -20,10 +20,40 @@ RUN curl -Lo https://github.com/gruntwork-io/terragrunt/releases/download/${TERR
     && sudo chmod +x /usr/share/tools/terragrunt
 
 # Install Ansible
-RUN RUN yum install -y \
-    epel-release \
-    ansible \
+# RUN yum install -y \
+#     epel-release \
+#     ansible \
+#     && yum clean all
+
+RUN yum install -y \
+    PyYAML \
+    libtomcrypt \
+    libtommath \
+    libyaml \
+    make \
+    openssl \
+    python-babel \
+    python-backports \
+    python-backports-ssl_match_hostname \
+    python-cffi \
+    python-enum34 \
+    python-httplib2 \
+    python-idna \
+    python-ipaddress \
+    python-jinja2 \
+    python-markupsafe \
+    python-paramiko \
+    python-passlib \
+    python-ply \
+    python-pycparser \
+    python-setuptools \
+    python-six \
+    python2-crypto \
+    python2-cryptography \
+    python2-pyasn1 \
+    sshpass \
     && yum clean all
+
 
 
 # It's easy to get confused when just a volume is being used, so let's just keep
